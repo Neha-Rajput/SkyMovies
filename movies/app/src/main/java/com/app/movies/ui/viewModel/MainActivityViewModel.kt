@@ -2,10 +2,10 @@ package com.app.movies.ui.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.app.movies.data.Data
-import com.app.movies.data.Movies
+import com.app.movies.model.MovieData
+import com.app.movies.model.Movies
 import com.app.movies.network.APIService
-import com.app.movies.network.RetroInstance
+import com.app.movies.network.APIConnector
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -23,27 +23,17 @@ class MainActivityViewModel : ViewModel() {
         return finalFilter
     }
 
-
     fun makeApiCall() {
-        val retroInstance = RetroInstance.getRetroInstance().create(APIService::class.java)
+        val retroInstance = APIConnector.getRetroInstance().create(APIService::class.java)
         retroInstance.fetchMovies().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread()).subscribe(getMovieList())
     }
 
     fun filterMovies(value: String) {
-        println("111111")
-        println(value)
-        var filterMovieList: ArrayList<Data> = ArrayList()
+        val filterMovieList: ArrayList<MovieData> = ArrayList()
         for (it in movies.value?.data!!) {
             if (it.genre.contains(value, true) || it.title.contains(value, true)) {
-                println("------------")
-                println(value)
-                println("------------")
-                println(value)
                 filterMovieList.add((it))
-                println(filterMovieList)
-
-                // movies.value!!.data = arrayListOf(it)
             }
         }
         finalFilter.postValue(Movies(filterMovieList))

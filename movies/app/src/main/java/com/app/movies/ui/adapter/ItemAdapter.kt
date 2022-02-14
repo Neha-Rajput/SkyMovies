@@ -6,16 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.app.movies.data.Data
 import com.app.movies.databinding.ItemViewBinding
+import com.app.movies.model.MovieData
 
-class ItemAdapter : ListAdapter<Data, ItemViewHolder>(ItemAdapter) {
-    companion object : DiffUtil.ItemCallback<Data>() {
-        override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
+class ItemAdapter : ListAdapter<MovieData, ItemViewHolder>(ItemAdapter) {
+    companion object : DiffUtil.ItemCallback<MovieData>() {
+        override fun areItemsTheSame(oldItem: MovieData, newItem: MovieData): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean {
+        override fun areContentsTheSame(oldItem: MovieData, newItem: MovieData): Boolean {
             return oldItem == newItem
         }
     }
@@ -28,12 +28,8 @@ class ItemAdapter : ListAdapter<Data, ItemViewHolder>(ItemAdapter) {
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val binding = holder.binding as ItemViewBinding
-        val movieData = getItem(position)
         binding.run {
-            data = movieData
-            /* Glide.with(imageView).load(movieData.poster)
-                 .placeholder(R.drawable.ic_launcher_background)
-                 .error(R.drawable.ic_launcher_background).into(imageView)*/
+            movieData = getItem(position)
             executePendingBindings()
         }
     }

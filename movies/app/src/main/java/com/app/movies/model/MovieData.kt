@@ -1,12 +1,11 @@
-package com.app.movies.data
-
+package com.app.movies.model
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.app.movies.R
 import com.bumptech.glide.Glide
 
-data class Data(
+data class MovieData(
     val genre: String, val id: Int = 0, val poster: String, val title: String, val year: String
 ) {
     companion object DataBindingAdapter {

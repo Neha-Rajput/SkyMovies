@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 return true
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText?.isNotEmpty() == true && newText.count() > 2) {
 
@@ -54,8 +53,6 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
-
-
 
         viewModel.fetchMovieListObserver().observe(this, {
             if (it != null) {
@@ -66,7 +63,6 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this@MainActivity, errorMessage, Toast.LENGTH_SHORT).show()
                     }
                 }
-
             }
         })
     }

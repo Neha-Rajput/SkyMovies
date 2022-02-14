@@ -1,8 +1,7 @@
-package com.app.movies.data
-
+package com.app.movies.model
 
 data class Movies(
-    var `data`: ArrayList<Data> = ArrayList(),
+    var `data`: ArrayList<MovieData> = ArrayList(),
     val errorMessage: String? = null,
     val isLoading: Boolean = false
 )
